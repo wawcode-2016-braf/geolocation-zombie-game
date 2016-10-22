@@ -3,7 +3,7 @@ defmodule Zombie.TokenController do
 
   alias Zombie.User
 
-  def token(conn, %{"name" => name} = params) do
+  def token(conn, %{"name" => name}) do
 
     user = 
       case Repo.get_by(User, %{name: name}) do

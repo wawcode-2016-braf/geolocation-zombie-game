@@ -1,7 +1,7 @@
 defmodule Zombie.UserControllerTest do
   use Zombie.ConnCase
 
-  alias Zombie.User
+  # alias Zombie.User
   @valid_attrs %{email: "some content", name: "some content"}
   @invalid_attrs %{}
 

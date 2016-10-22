@@ -33,7 +33,7 @@ defmodule Zombie.GameServer do
     
 		{:noreply, state}
 	end
-  def handle_info({:update_position, %User{} = user, longitude, latitude}, %State{} = state) do
+  def handle_info({:update_position, %User{} = user, longitude, latitude}, %State{players: players} = state) do
     # Save player's location
     players = Map.get_and_update(players, user.id, fn player -> %Player{player | position: {longitude, latitude}} end)
     # TODO: Add location to database
@@ -52,7 +52,7 @@ defmodule Zombie.GameServer do
       case Map.get(players, user.id) do
         nil -> 
           # TODO: Add Participation to database
-          Map.put(players, %Player{user: user})
+          Map.put(players, user.id, %Player{user: user})
         p -> p
       end
 
@@ -63,7 +63,7 @@ defmodule Zombie.GameServer do
     GenServer.call(__MODULE__, {:join, user})
   end
 
-  def user_move(%User{} = user, {"longitude" => longitude, "latitude" => latitude}) do
+  def user_move(%User{} = user, %{"longitude" => longitude, "latitude" => latitude}) do
     send(__MODULE__, {:update_position, user, longitude, latitude})
     # TODO: Send notification to proper users about location change
     send(__MODULE__, {:check_colisions, user})
