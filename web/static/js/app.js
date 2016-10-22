@@ -12,6 +12,7 @@
 // If you no longer want to use a dependency, remember
 // to also remove its path from "config.paths.watched".
 import "phoenix_html"
+import $ from "jquery"
 
 // Import local files
 //
@@ -43,3 +44,19 @@ import "phoenix_html"
       });
   }.call(this));
   
+
+  $(".form1").on('submit', function() {
+      var name = $("#name1").val();
+      $.getJSON("/api/token/" + name, function(data) {
+          window.location.href = "/game/?token=" + data.data.token;
+      });
+      return false;
+  });
+
+  $(".form2").on('submit', function() {
+      var name = $("#name2").val();
+      $.getJSON("/api/token/" + name, function(data) {
+          window.location.href = "/game/?token=" + data.data.token;
+      });
+      return false;
+  });

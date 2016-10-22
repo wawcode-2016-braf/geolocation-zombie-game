@@ -1,5 +1,5 @@
 
-<p>Click the button to get your coordinates.</p>
+<p>Click the button to get your coordinates. <%= @token %></p>
 
 <button onclick="getLocation()">Try It</button>
 

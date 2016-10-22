@@ -27,7 +27,7 @@
       <%= render @view_module, @view_template, assigns %>
     </div>
     <footer>
-      <br><br><br><p>copyright &copy; BRA+f Studio | <a href="/">Home</a> | <a href="/game">Game</a></p>
+      <br><br><br><p>copyright &copy; BRA+f Studio | <a href="/">Home</a></p>
     </footer>
   </div>
 

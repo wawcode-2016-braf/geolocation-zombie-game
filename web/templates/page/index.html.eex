@@ -8,14 +8,14 @@
     <div class='col-sm-6 lewa'>
       <p class="p1">Zaloguj się!</p>
       <form class="form1" name="nazwa" action="/game" method="get" ENCTYPE="multipart/form-data">
-        <label>nazwa użytkownika:</label><br><input type="text" name="login"><br><br>
+        <label>nazwa użytkownika:</label><br><input type="text" name="name" id="name1"><br><br>
         <label>hasło:</label><br><input type="password" name="password"><br><br>
         <input class="subm" type="submit" value="zaloguj">
       </form><br><br>
       <p class="p1">Dołącz do gry!</p>
       <form class="form2" name="rej" action="/game" method="get" ENCTYPE="multipart/form-data">
         <label for="email">email:</label><br><input type="email" id="email" name="email"><br><br>
-        <label>nazwa użytkownika:</label><br><input type="text" name="login"><br><br>
+        <label>nazwa użytkownika:</label><br><input type="text" name="name" id="name2"><br><br>
         <label>hasło:</label><br><input type="password" name="password"><br><br>
         <label>powtórz hasło:</label><br><input type="password" name="password"><br><br>
         <input class="subm" type="submit" value="zarejestruj">

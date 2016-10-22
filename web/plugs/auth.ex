@@ -22,13 +22,14 @@ defmodule Zombie.Plugs.Auth do
     case Phoenix.Token.verify(Zombie.Endpoint, "user", token) do
       {:ok, user_id} -> 
         case Repo.get(User, user_id) do
-          %User{} = user -> assign(conn, :current_user, user)
+          %User{} = user ->
+            conn 
+            |> assign(:current_user, user)
+            |> assign(:token, token)
           _ -> unauthorized(conn)
         end
       _ -> unauthorized(conn)
     end
-
-    
   end
   defp authorize(conn), do: unauthorized(conn)
 
