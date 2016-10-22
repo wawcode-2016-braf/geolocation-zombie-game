@@ -38,7 +38,8 @@ defmodule Zombie.Mixfile do
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
-     {:coherence, "~> 0.3"},]
+     {:coherence, "~> 0.3"},
+     {:distance, "~> 0.2.1"},]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
