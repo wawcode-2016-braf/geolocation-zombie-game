@@ -11,12 +11,6 @@ defmodule Zombie.Router do
     plug Coherence.Authentication.Session
   end
 
-  pipeline :api do
-    plug :accepts, ["json"]
-    plug :fetch_session
-    plug Coherence.Authentication.Token, source: :params, param: "token"
-  end
-
   pipeline :protected do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -40,6 +34,11 @@ defmodule Zombie.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :api_auth do
+    plug :accepts, ["json"]
+    plug Coherence.Authentication.Token, source: :params, param: "token"
+  end
+
   scope "/", Zombie do
     pipe_through :browser # Use the default browser stack
 
@@ -51,8 +50,15 @@ defmodule Zombie.Router do
 
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", Zombie do
-  #   pipe_through :api
-  # end
+  scope "/api", Zombie do
+    pipe_through :api
+
+    get "/token/:name", TokenController, :token
+  end
+
+  scope "/api", Zombie do
+    pipe_through :api_auth
+
+    resources "/users", UserController, except: [:new, :edit]
+  end
 end

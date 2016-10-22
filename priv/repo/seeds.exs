@@ -10,5 +10,5 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 
-Zombie.User.changeset(%Zombie.User{}, %{name: "Test User", email: "testuser@example.com", password: "secret", password_confirmation: "secret"})
+Zombie.User.changeset(%Zombie.User{}, %{name: "test", email: "testuser@example.com", password: "secret", password_confirmation: "secret"})
 |> Zombie.Repo.insert!
