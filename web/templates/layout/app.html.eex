@@ -27,7 +27,16 @@
       <%= render @view_module, @view_template, assigns %>
     </div>
     <footer>
-      <br><br><br><p>copyright &copy; BRA+f Studio | <a href="/">Home</a> | <a href="/game">Game</a></p>
+      <img class="social" src="images/socialmedia.svg">
+      <div class="media">
+          <img class="media1" src="images/pinterest.svg">
+          <img class="media2" src="images/twitter.svg">
+          <img class="media3" src="images/facebook.svg">
+          <img class="media4" src="images/instagram.svg">
+          <div class="clear"></div>
+      </div>
+      <div class="social"></div>
+      <div class="stopka">copyright &copy; BRA+f Studio | <a href="/">Home</a> | <a href="/game">Game</a></div>
     </footer>
   </div>
 

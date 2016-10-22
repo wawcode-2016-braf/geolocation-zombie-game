@@ -80,6 +80,45 @@ p {
         background-image: url("/images/front.png");
         background-position: bottom;
     }
+    .social {
+        position: absolute;
+        left: 380px;
+        bottom: 10px;
+        height: 80px;
+        opacity: 0.05;
+        filter: alpha(opacity=5);
+    }
+
+    .right {
+        position: relative;
+    }
+
+    .zombieindex {
+        position: absolute;
+        right: 320px;
+        top: 135px;
+    }
+
+    .zombieindex2 {
+        position: absolute;
+        left: 300px;
+        top: 58px;
+    }
+
+    .zombieindeximg1 {
+        height: 560px;
+        transform: rotate(-10deg);
+    }
+
+    .zombieindeximg2 {
+        height: 600px;
+    }
+
+    .righttext {        
+        position: absolute;
+        left: 0px;
+        top: 0px;
+    }
 
 }
 
@@ -190,13 +229,81 @@ input {
 }
 
 footer {
-    height: 100px;
+    height: 110px;
     background-color: #321113;
     text-align: center;
     font-size: 15px;
+    position: relative;
 }
 
 h3 {
     color: white;
     padding-bottom: 20px;
 }
+
+.media {
+    width: 240px;
+    height: 60px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    padding-top: 10px;
+    
+}
+
+.media1:hover {
+opacity: 1;
+    filter: alpha(opacity=100);
+}
+.media2:hover {
+opacity: 1;
+    filter: alpha(opacity=100);
+}
+.media3:hover {
+opacity: 1;
+    filter: alpha(opacity=100);
+}
+.media4:hover {
+opacity: 1;
+    filter: alpha(opacity=100);
+}
+.media1 {
+    height: 60px;
+    width: 60px;
+    padding: 10px;
+    float: left;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+}
+
+.media2 {
+    height: 60px;
+    width: 60px;
+    padding: 10px;
+    float: left;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+}
+.media3 {
+    height: 60px;
+    width: 60px;
+    padding: 10px;
+    float: left;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+}
+.media4 {
+    height: 60px;
+    width: 60px;
+    padding: 10px;
+    float: left;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+}
+
+.clear {
+    clear: both;
+}
+
+
+
