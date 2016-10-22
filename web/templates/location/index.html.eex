@@ -3,8 +3,10 @@
 <table class="table">
   <thead>
     <tr>
+      <th>Time</th>
       <th>Lon</th>
       <th>Lat</th>
+      <th>User</th>
 
       <th></th>
     </tr>
@@ -12,8 +14,10 @@
   <tbody>
 <%= for location <- @locations do %>
     <tr>
+      <td><%= location.inserted_at %></td>
       <td><%= location.lon %></td>
       <td><%= location.lat %></td>
+      <td><%= location.user_id %></td>
 
       <td class="text-right">
         <%= link "Show", to: location_path(@conn, :show, location), class: "btn btn-default btn-xs" %>

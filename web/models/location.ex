@@ -2,8 +2,8 @@ defmodule Zombie.Location do
   use Zombie.Web, :model
 
   schema "locations" do
-    field :lon, :decimal, precision: 7
-    field :lat, :decimal, precision: 7
+    field :lon, :decimal, precision: 14, scale: 10
+    field :lat, :decimal, precision: 14, scale: 10
     belongs_to :user, Zombie.User
 
     timestamps()
