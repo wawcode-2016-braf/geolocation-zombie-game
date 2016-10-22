@@ -4,8 +4,8 @@ body {
   padding: 0;
   margin: 0;
   background-color: #210002;
-  font-family: 'Playfair Display', serif;
-  color: #fff;
+  font-family: 'Roboto Condensed', sans-serif;
+  color: #ffaf1b;
 }
 
 #zombie {
@@ -30,11 +30,12 @@ body {
 
 #zombie-mobile {
   display: none;
-  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/272781/full_illustration.png") no-repeat center bottom/cover;
+  background: url("/images/mtlo.jpg") no-repeat center bottom/cover;
   height: 320px;
 }
 
 .first-section {
+    background-color: #210002;
   padding: 50px 0 20px 0;
 }
 
@@ -46,10 +47,12 @@ body {
 h1 {
   line-height: 120%;
   margin-bottom: 30px;
+  font-size: 50px;
+  text-align: center;
 }
 
 p {
-  color: #ede0d5;
+  color: #ffaf1b;
   font-size: 18px;
   line-height: 150%;
 }
@@ -80,10 +83,12 @@ p {
 
 .layer-4 {
   background-image: url("/images/front.png");
+  background-position: bottom;
 }
 
 .layer-overlay {
   background-image: url("");
+  
 }
 
 @media only screen and (max-width: 768px) {
