@@ -2,8 +2,8 @@ defmodule Zombie.Location do
   use Zombie.Web, :model
 
   schema "locations" do
-    field :lon, :decimal, precision: 7
-    field :lat, :decimal, precision: 7
+    field :lon, :decimal, precision: 14, scale: 10
+    field :lat, :decimal, precision: 14, scale: 10
     belongs_to :user, Zombie.User
 
     timestamps()
@@ -16,7 +16,7 @@ defmodule Zombie.Location do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:lon, :lat])
-    |> validate_required([:lon, :lat])
+    |> cast(params, [:lon, :lat, :user_id])
+    |> validate_required([:lon, :lat, :user_id])
   end
 end

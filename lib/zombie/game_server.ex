@@ -5,7 +5,7 @@ defmodule Zombie.GameServer do
   use GenServer
   require Logger
 
-  alias Zombie.User
+  alias Zombie.{User, Location, Repo}
 
   @immune_time 120_000 # miliseconds
   @distance 50 # meters
@@ -47,7 +47,10 @@ defmodule Zombie.GameServer do
   def handle_info({:update_position, %User{} = user, longitude, latitude}, %State{players: players} = state) do
     # Save player's location
     players = Map.update!(players, user.id, fn player -> %Player{player | position: {longitude, latitude}} end)
-    # TODO: Add location to database
+
+    changeset = Location.changeset(%Location{}, %{"lat" => Decimal.new(latitude), "lon" => longitude, "user_id" => user.id})
+    Repo.insert!(changeset)
+
     {:noreply, %State{state | players: players}}
   end
   def handle_info({:check_colisions, %User{} = user}, %State{} = state) do
