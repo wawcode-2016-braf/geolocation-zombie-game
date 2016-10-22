@@ -8,34 +8,12 @@ body {
   color: #ffaf1b;
 }
 
-#zombie {
-  height: 800px;
-  overflow: hidden;
-  position: relative;
-}
-
 #content {
   background-color: #210002;
 }
 
-.layer {
-  background-position: bottom center;
-  background-size: auto;
-  background-repeat: no-repeat;
-  width: 100%;
-  height: 800px;
-  position: fixed;
-  z-index: -1;
-}
-
-#zombie-mobile {
-  display: none;
-  background: url("/images/mtlo.jpg") no-repeat center bottom/cover;
-  height: 320px;
-}
-
 .first-section {
-    background-color: #210002;
+  background-color: #210002;
   padding: 50px 0 20px 0;
 }
 
@@ -57,88 +35,114 @@ p {
   line-height: 150%;
 }
 
-#zombie, .layer {
-  min-height: 1000px;
-}
+@media only screen and (min-width: 769px) {
+    #zombie {
+        height: 800px;
+        overflow: hidden;
+        position: relative;
+    }
 
-.layer-bg {
-  background-image: url("/images/tlo03.jpg"); /*tlo nieruchome*/
-}
+    #zombie, .layer {
+        min-height: 1000px;
+    }
 
-/* ruchome budynki */
+    .layer {
+        background-position: bottom center;
+        background-size: auto;
+        background-repeat: no-repeat;
+        width: 100%;
+        height: 800px;
+        position: fixed;
+        z-index: -1;
+    }
 
-.layer-1 {
-  background-image: url("/images/zombie3.png"); 
-  background-position: bottom;
-}
+    .layer-bg {
+        background-image: url("/images/tlo03.jpg"); /*tlo nieruchome*/
+    }
 
-.layer-2 {
-  background-image: url("/images/zombie2.png");
-}
+    /* ruchome budynki */
 
-.layer-3 {
-  background-image: url("/images/zombie1.png");
-  background-position: bottom;
-}
+    .layer-1 {
+        background-image: url("/images/zombie3.png"); 
+        background-position: bottom;
+    }
 
-.layer-4 {
-  background-image: url("/images/front.png");
-  background-position: bottom;
+    .layer-2 {
+        background-image: url("/images/zombie2.png");
+    }
+
+    .layer-3 {
+        background-image: url("/images/zombie1.png");
+        background-position: bottom;
+    }
+
+    .layer-4 {
+        background-image: url("/images/front.png");
+        background-position: bottom;
+    }
+
 }
 
 @media only screen and (max-width: 768px) {
 
-  #zombie {
-  height: 300px;
-  overflow: hidden;
-  position: relative;
+    #zombie {
+        height: 300px;
+        overflow: hidden;
+        position: relative;
+    }
+    
+    #zombie, .layer {
+        min-height: 300px;
+    }
+
+    .layer {
+        background-position: top center;
+        background-size: auto;
+        background-repeat: no-repeat;
+        width: 100%;
+        height: 300px;
+        position: fixed;
+        z-index: -1;
+    }
+
+    .layer-bg {
+        background-image: url("/images/mtlo2.jpg");
+        background-position: top center;
+    }
+
+    .layer-1 {
+        background-image: url("/images/mzombie3.png"); 
+        background-position: top center;
+    }
+
+    .layer-2 {
+        background-image: url("/images/mzombie2.png");
+        background-position: top center;
+    }
+
+    .layer-3 {
+        background-image: url("/images/mzombie1.png");
+        background-position: top center;
+    }
+
+    .layer-4 {
+        background-image: url("/images/mfront.png");
+        background-position: top center;
+    }
+
+    h1 {
+        font-size: 25px;
+    }
+
+    .lewa {
+        text-align: center;
+        padding-bottom: 25px;
+    }
+
 }
 
- /* #zombie-mobile {
-    display: block;
-  }
 
-  #zombie, .layer {
-  min-height: 300px;
-}*/
 
-.layer {
-  background-position: top center;
-  background-size: auto;
-  background-repeat: no-repeat;
-  width: 500px;
-  height: 300px;
-  position: fixed;
-  z-index: -1;
-}
-
-.layer-bg {
-  background-image: url("/images/mtlo2.jpg");
-  background-position: top center;
-}
-
-.layer-1 {
-  background-image: url("/images/mzombie3.png"); 
-  background-position: top center;
-}
-
-.layer-2 {
-  background-image: url("/images/mzombie2.png");
-  background-position: top center;
-}
-
-.layer-3 {
-  background-image: url("/images/mzombie1.png");
-  background-position: top center;
-}
-
-.layer-4 {
-  background-image: url("/images/mfront.png");
-  background-position: top center;
-}
-
-}
-} 
 
 .tutorial-link {
   color: #fff;
