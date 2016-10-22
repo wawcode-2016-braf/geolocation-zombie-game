@@ -14,9 +14,9 @@ defmodule Zombie.TokenController do
         u -> u
       end
 
-    :ok = GameServer.user_join(user)
+    {:ok, zombie?} = GameServer.user_join(user)
 
     token = Phoenix.Token.sign(Zombie.Endpoint, "user", user.id)
-    render(conn, "token.json", id: user.id, name: name, token: token)
+    render(conn, "token.json", id: user.id, name: name, token: token, zombie?: zombie?)
   end
 end

@@ -10,6 +10,7 @@ defmodule Zombie.GameServer do
   @immune_time 120_000 # miliseconds
   @distance 50 # meters
   @human_reveal_time 60 # seconds 
+  @zombies_ratio 5 # zombies per human
 
   defmodule State do
     defstruct [:start_date, :players, :last_visible]
@@ -37,14 +38,13 @@ defmodule Zombie.GameServer do
 		{:noreply, state}
 	end
   def handle_info(:loop, %State{} = state) do
-    Process.send_after(self, :loop, 5_000)
+    Process.send_after(self, :loop, 10_000)
 
-    # IO.inspect state
+    IO.inspect state
 
     {:noreply, state}
   end
   def handle_info({:update_position, %User{} = user, longitude, latitude}, %State{players: players} = state) do
-
     # Save player's location
     players = Map.update!(players, user.id, fn player -> %Player{player | position: {longitude, latitude}} end)
     # TODO: Add location to database
@@ -59,15 +59,18 @@ defmodule Zombie.GameServer do
 
   def handle_call({:join, %User{} = user}, _from, %State{players: players} = state) do
 
-    players = 
-      case Map.get(players, user.id) do
-        nil -> 
-          # TODO: Add Participation to database
-          Map.put(players, user.id, %Player{user: user})
-        _p -> players
-      end
-
-    {:reply, :ok, %State{state | players: players}}
+    {player, players} = Map.get_and_update(players, user.id, fn player -> 
+        case player do
+          nil -> 
+            # TODO: Add Participation to database
+            # Update player and get his value
+            player = %Player{user: user, zombie?: !rand_human(players)}
+            {player, player}
+          p -> {p, p}
+        end
+      end)
+    
+    {:reply, {:ok, player.zombie?}, %State{state | players: players}}
   end
   def handle_call({:leave, %User{} = user}, _from, %State{players: players} = state) do
     players = 
@@ -92,6 +95,24 @@ defmodule Zombie.GameServer do
     # TODO: Send channel notification to proper users about location change
     send(__MODULE__, {:check_colisions, user})
     :ok
+  end
+
+  # randomly give players role for being human or zombie
+  defp rand_human(players) do
+    zombies_count =
+      players
+      |> Map.values
+      |> Enum.count(fn p -> p.zombie? end)
+
+    players_count =
+      players
+      |> Map.values
+      |> Enum.count(fn p -> !p.zombie? end)
+
+    # k - ludzie
+    # j - zombie
+    # j/n - k + 1
+    (zombies_count / @zombies_ratio - players_count + 1) * 10_000 > :rand.uniform(10_000)
   end
 
 end
