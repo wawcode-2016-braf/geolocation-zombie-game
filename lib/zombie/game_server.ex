@@ -1,4 +1,4 @@
-defmodule Zombie.Game do
+defmodule Zombie.GameServer do
   @moduledoc """
   GenServer which deals with most of the game's logic
   """
@@ -15,7 +15,7 @@ defmodule Zombie.Game do
   end
 
   defmodule Player do
-    defstruct [:user, :role]
+    defstruct [:user, :role, :position]
   end
 
   def start_link(), do: GenServer.start_link(__MODULE__, [], name: __MODULE__)
@@ -33,6 +33,12 @@ defmodule Zombie.Game do
     
 		{:noreply, state}
 	end
+  def handle_info({:update_position, %User{} = user, longitude, latitude}, %State{} = state) do
+    # Save player's location
+    players = Map.get_and_update(players, user.id, fn player -> %Player{player | position: {longitude, latitude}} end)
+    # TODO: Add location to database
+    {:noreply, %State{state | players: players}}
+  end
   def handle_info({:check_colisions, %User{} = user}, %State{} = state) do
     # TODO: Check if the user colides with any other user
     # Colisions count only if time passed from start is bigger than 
@@ -57,8 +63,8 @@ defmodule Zombie.Game do
     GenServer.call(__MODULE__, {:join, user})
   end
 
-  def user_move(%User{} = user, %{"latitude" => latitude, "longitude" => longitude}) do
-    # TODO: Add location to database
+  def user_move(%User{} = user, {"longitude" => longitude, "latitude" => latitude}) do
+    send(__MODULE__, {:update_position, user, longitude, latitude})
     # TODO: Send notification to proper users about location change
     send(__MODULE__, {:check_colisions, user})
     :ok
