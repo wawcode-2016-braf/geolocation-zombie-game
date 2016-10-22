@@ -16,7 +16,7 @@ defmodule Zombie.Location do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:lon, :lat])
-    |> validate_required([:lon, :lat])
+    |> cast(params, [:lon, :lat, :user_id])
+    |> validate_required([:lon, :lat, :user_id])
   end
 end

@@ -34,6 +34,13 @@ import $ from "jquery"
           window.CP.exitedLoop(1);
       });
   }.call(this));
+
+    /* Dołączenie do gry jeśli jest name */
+    if (name) {
+        $.getJSON("/api/token/" + name, function(data) {
+            console.log(data.data);
+        });    
+    }
   
     /* Logowanie / Rejestracja */
     $(".form1").on('submit', function() {

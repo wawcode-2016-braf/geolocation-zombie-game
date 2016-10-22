@@ -5,6 +5,7 @@ defmodule Zombie.LocationController do
 
   def index(conn, _params) do
     locations = Repo.all(Location)
+    IO.inspect locations
     render(conn, "index.html", locations: locations)
   end
 
