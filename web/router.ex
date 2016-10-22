@@ -1,6 +1,6 @@
 defmodule Zombie.Router do
   use Zombie.Web, :router
-  use Coherence.Router
+  #use Coherence.Router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -8,7 +8,7 @@ defmodule Zombie.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
-    plug Coherence.Authentication.Session
+    #plug Coherence.Authentication.Session
   end
 
   pipeline :protected do
@@ -17,17 +17,17 @@ defmodule Zombie.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
-    plug Coherence.Authentication.Session, protected: true  # Add this
+    #plug Coherence.Authentication.Session, protected: true  # Add this
   end
 
   scope "/" do
     pipe_through :browser
-    coherence_routes
+    #coherence_routes
   end
 
   scope "/" do
     pipe_through :protected
-    coherence_routes :protected
+    #coherence_routes :protected
   end
 
   pipeline :api do
@@ -36,7 +36,7 @@ defmodule Zombie.Router do
 
   pipeline :api_auth do
     plug :accepts, ["json"]
-    plug Coherence.Authentication.Token, source: :params, param: "token"
+    #plug Coherence.Authentication.Token, source: :params, param: "token"
   end
 
   scope "/", Zombie do

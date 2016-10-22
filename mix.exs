@@ -19,7 +19,7 @@ defmodule Zombie.Mixfile do
   def application do
     [mod: {Zombie, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :coherence]]
+                    :phoenix_ecto, :postgrex]]
   end
 
   # Specifies which paths to compile per environment.
@@ -38,7 +38,7 @@ defmodule Zombie.Mixfile do
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
-     {:coherence, "~> 0.3"},
+     #{:coherence, "~> 0.3"},
      {:distance, "~> 0.2.1"},]
   end
 
