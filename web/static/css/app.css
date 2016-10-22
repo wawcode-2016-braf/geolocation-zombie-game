@@ -3,7 +3,7 @@
 body {
   padding: 0;
   margin: 0;
-  background-color: #210002;
+  background-color: #1d0303;
   font-family: 'Playfair Display', serif;
   color: #fff;
 }
@@ -15,7 +15,7 @@ body {
 }
 
 #content {
-  background-color: #210002;
+  background-color: #1d0303;
 }
 
 .layer {
@@ -30,11 +30,12 @@ body {
 
 #zombie-mobile {
   display: none;
-  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/272781/full_illustration.png") no-repeat center bottom/cover;
+  background: url("/images/mtlo.jpg") no-repeat center bottom/cover;
   height: 320px;
 }
 
 .first-section {
+    background-color: #1d0303;
   padding: 50px 0 20px 0;
 }
 
@@ -79,7 +80,7 @@ p {
 }
 
 .layer-4 {
-  background-image: url("/images/front.png");
+  background-image: url("/images/front3.png");
 }
 
 .layer-overlay {
