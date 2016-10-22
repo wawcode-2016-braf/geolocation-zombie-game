@@ -9,20 +9,13 @@ defmodule Zombie.Router do
     plug :put_secure_browser_headers
   end
 
-  pipeline :protected do
-    plug :accepts, ["html"]
-    plug :fetch_session
-    plug :fetch_flash
-    plug :protect_from_forgery
-    plug :put_secure_browser_headers
-  end
-
   pipeline :api do
     plug :accepts, ["json"]
   end
 
   pipeline :api_auth do
     plug :accepts, ["json"]
+    plug Zombie.Plugs.Auth
   end
 
   scope "/", Zombie do
@@ -30,11 +23,6 @@ defmodule Zombie.Router do
 
     get "/", PageController, :index
     get "/game", GameController, :index
-  end
-
-  scope "/", Zombie do
-    pipe_through :protected
-
   end
 
   scope "/api", Zombie do

@@ -1,10 +1,12 @@
-defmodule Zombie.Plugs.ApiAuth do
+defmodule Zombie.Plugs.Auth do
   @moduledoc """
-  Plug makes assign `:token` available to controllers.
+  Plug makes assign `:current_user` available to controllers based on token
   """
 
   import Plug.Conn
   import Phoenix.Controller
+
+  alias Zombie.{User, Repo}
 
   @doc """
   Callback invoked by Plug on every request
@@ -17,13 +19,16 @@ defmodule Zombie.Plugs.ApiAuth do
   def call(conn, _opts), do: authorize(conn)
 
   defp authorize(conn = %{params: %{"token" => token}}) do
-    user_id = Phoenix.Token.verify(Zombie.Endpoint, "user", token)
-
-    if user_id == nil do
-      unauthorized(conn)
-    else
-      conn
+    case Phoenix.Token.verify(Zombie.Endpoint, "user", token) do
+      {:ok, user_id} -> 
+        case Repo.get(User, user_id) do
+          %User{} = user -> assign(conn, :current_user, user)
+          _ -> unauthorized(conn)
+        end
+      _ -> unauthorized(conn)
     end
+
+    
   end
   defp authorize(conn), do: unauthorized(conn)
 

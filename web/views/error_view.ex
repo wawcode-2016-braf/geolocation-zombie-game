@@ -1,6 +1,10 @@
 defmodule Zombie.ErrorView do
   use Zombie.Web, :view
 
+  def render("401.json", _assigns) do
+    "Unathorized"
+  end
+
   def render("404.html", _assigns) do
     "Page not found"
   end
