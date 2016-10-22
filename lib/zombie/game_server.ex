@@ -1,4 +1,4 @@
-defmodule Zombie.Game do
+defmodule Zombie.GameServer do
   use GenServer
 
   defmodule State do
