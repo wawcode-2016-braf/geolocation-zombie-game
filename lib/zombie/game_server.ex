@@ -44,8 +44,9 @@ defmodule Zombie.GameServer do
     {:noreply, state}
   end
   def handle_info({:update_position, %User{} = user, longitude, latitude}, %State{players: players} = state) do
+
     # Save player's location
-    players = Map.get_and_update(players, user.id, fn player -> %Player{player | position: {longitude, latitude}} end)
+    players = Map.update!(players, user.id, fn player -> %Player{player | position: {longitude, latitude}} end)
     # TODO: Add location to database
     {:noreply, %State{state | players: players}}
   end

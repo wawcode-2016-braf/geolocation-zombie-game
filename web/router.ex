@@ -35,5 +35,6 @@ defmodule Zombie.Router do
     pipe_through :api_auth
 
     resources "/users", UserController, except: [:new, :edit]
+    put "/location", LocationController, :save
   end
 end

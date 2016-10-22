@@ -2,6 +2,7 @@ defmodule Zombie.TokenController do
   use Zombie.Web, :controller
 
   alias Zombie.User
+  alias Zombie.GameServer
 
   def token(conn, %{"name" => name}) do
 
@@ -12,6 +13,8 @@ defmodule Zombie.TokenController do
           |> Zombie.Repo.insert!
         u -> u
       end
+
+    :ok = GameServer.user_join(user)
 
     token = Phoenix.Token.sign(Zombie.Endpoint, "user", user.id)
     render(conn, "token.json", id: user.id, name: name, token: token)
