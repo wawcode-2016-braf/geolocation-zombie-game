@@ -49,7 +49,6 @@ defmodule Zombie.GameServer do
     players = Map.update!(players, user.id, fn player -> %Player{player | position: {longitude, latitude}} end)
 
     changeset = Location.changeset(%Location{}, %{"lat" => Decimal.new(latitude), "lon" => longitude, "user_id" => user.id})
-    IO.inspect changeset
     Repo.insert!(changeset)
 
     {:noreply, %State{state | players: players}}

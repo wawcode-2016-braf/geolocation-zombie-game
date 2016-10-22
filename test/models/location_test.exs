@@ -3,7 +3,7 @@ defmodule Zombie.LocationTest do
 
   alias Zombie.Location
 
-  @valid_attrs %{lat: "120.5", lon: "120.5"}
+  @valid_attrs %{lat: "120.5", lon: "120.5", user_id: 1}
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do
