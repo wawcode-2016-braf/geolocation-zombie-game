@@ -6,7 +6,7 @@ defmodule Zombie.ApiController do
     {lon, _} = Float.parse(lon)
     {lat, _} = Float.parse(lat)
     params = %{params | "longitude" => lon, "latitude" => lat}
-    save(conn, params)
+    save_location(conn, params)
   end
   def save_location(%{assigns: %{current_user: user}} = conn, %{"longitude" => _lon, "latitude" => _lat} = params) do
     GameServer.user_move(user, params)
