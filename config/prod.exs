@@ -21,7 +21,7 @@ config :zombie, Zombie.Endpoint,
 config :logger, level: :info
 
 # Configure your database
-config :hello_phoenix, HelloPhoenix.Repo,
+config :zombie, Zombie.Repo,
   adapter: Ecto.Adapters.Postgres,
   url: [scheme: "https", host: "immense-wave-80129.herokuapp.com", port: 443],
     force_ssl: [rewrite_on: [:x_forwarded_proto]],
