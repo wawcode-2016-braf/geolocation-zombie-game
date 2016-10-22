@@ -12,6 +12,7 @@
   <link rel='stylesheet prefetch' href='//codepen.io/assets/reset/normalize.css'>
   <link rel='stylesheet prefetch' href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
   <link rel='stylesheet prefetch' href='//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.3/animate.min.css'>
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300" rel="stylesheet">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -32,9 +33,9 @@
   <div class='container'>
     <section class='first-section'>
       <div class='row'>
-        <div class='col-sm-6'>
-          <h1>Tytuł</h1>
-        </div>
+        
+          <h1>"Cho­ciaż kro­wie dasz ka­kao, nie wy­doisz czekolady"</h1>
+        
       </div>
       <div class='row'>
         <div class='col-sm-6'>
