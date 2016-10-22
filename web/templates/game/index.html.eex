@@ -1,27 +1,24 @@
-<div class="row marketing">
-  <div class="col-lg-6">
-    <p>Click the button to get your coordinates.</p>
 
-    <button onclick="getLocation()">Try It</button>
+<p>Click the button to get your coordinates.</p>
 
-    <p id="demo"></p>
+<button onclick="getLocation()">Try It</button>
 
-    <script>
-    var x = document.getElementById("demo");
+<p id="location"></p>
 
-    function getLocation() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
-        } else {
-            x.innerHTML = "Geolocation is not supported by this browser.";
-        }
+<script>
+var x = document.getElementById("location");
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
     }
+}
 
-    function showPosition(position) {
-        x.innerHTML = "Latitude: " + position.coords.latitude +
-        "<br>Longitude: " + position.coords.longitude;
-    }
-    </script>
-  
-  </div>
-</div>
+function showPosition(position) {
+    console.log(position);
+    x.innerHTML = "Latitude: " + position.coords.latitude +
+    "<br>Longitude: " + position.coords.longitude;
+}
+</script>

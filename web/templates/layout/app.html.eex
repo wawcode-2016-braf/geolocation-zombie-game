@@ -1,104 +1,54 @@
 
 <!DOCTYPE html>
 <html class='animated fadeIn'>
-<head>
-  <script src='//assets.codepen.io/assets/editor/live/console_runner-d0a557e5cb67f9cd9bbb9673355c7e8e.js'></script>
-  <script src='//assets.codepen.io/assets/editor/live/events_runner-21174b4c7273cfddc124acb0876792e0.js'></script>
-  <script src='//assets.codepen.io/assets/editor/live/css_live_reload_init-7618a0de08795409d8f6c9ef6805f7b2.js'></script>
-  <meta charset='UTF-8'><meta name="robots" content="noindex">
-  <link rel="canonical" href="http://codepen.io/zabielski/pen/MyoBaY" />
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href='https://fonts.googleapis.com/css?family=Playfair+Display' rel='stylesheet' type='text/css'>
-  <link rel='stylesheet prefetch' href='//codepen.io/assets/reset/normalize.css'>
-  <link rel='stylesheet prefetch' href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
-  <link rel='stylesheet prefetch' href='//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.3/animate.min.css'>
-  <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300" rel="stylesheet">
-
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
-
-</head>
-<body>
-<div id='zombie'>
-  <div class='layer-bg layer' data-depth='0.10' data-type='parallax'></div>
-  <div class='layer-1 layer' data-depth='0.20' data-type='parallax'></div>
-  <div class='layer-2 layer' data-depth='0.50' data-type='parallax'></div>
-  <div class='layer-3 layer' data-depth='0.80' data-type='parallax'></div>
-  <div class='layer-overlay layer' data-depth='0.85' data-type='parallax'></div>
-  <div class='layer-4 layer' data-depth='1.00' data-type='parallax'></div>
-</div>
-<div id='zombie-mobile'></div>
-<div id='content'>
-  <div class='container'>
-    <section class='first-section'>
-      <div class='row'>
-        
-          <h1>"Cho­ciaż kro­wie dasz ka­kao, nie wy­doisz czekolady"</h1>
-        
-      </div>
-      <div class='row'>
-        <div class='col-sm-6'>
-          <%= render @view_module, @view_template, assigns %>
-          <p>And besides all this, there was a certain lofty bearing about the Pagan, which even his uncouthness could not altogether maim. He looked like a man who had never cringed and never had had a creditor. Whether it was, too, that his head being shaved, his forehead was drawn out in freer and brighter relief, and looked more expansive than it otherwise would, this I will not venture to decide; but certain it was his head was phrenologically an excellent one.</p>
-          <p>It may seem ridiculous, but it reminded me of General Washington's head, as seen in the popular busts of him. It had the same long regularly graded retreating slope from above the brows, which were likewise very projecting, like two long promontories thickly wooded on top. Queequeg was George Washington cannibalistically developed.</p>
-          <p>Whilst I was thus closely scanning him, half-pretending meanwhile to be looking out at the storm from the casement, he never heeded my presence, never troubled himself with so much as a single glance; but appeared wholly occupied with counting the pages of the marvellous book. Considering how sociably we had been sleeping together the night previous, and especially considering the affectionate arm I had found thrown over me upon waking in the morning, I thought this indifference of his very strange. But savages are strange beings; at times you do not know exactly how to take them.</p>
-        </div>
-        <div class='col-sm-6'>
-          <p>At first they are overawing; their calm self-collectedness of simplicity seems a Socratic wisdom. I had noticed also that Queequeg never consorted at all, or but very little, with the other seamen in the inn. He made no advances whatever; appeared to have no desire to enlarge the circle of his acquaintances. All this struck me as mighty singular; yet, upon second thoughts, there was something almost sublime in it. Here was a man some twenty thousand miles from home, by the way of Cape Horn, that is—which was the only way he could get there—thrown among people as strange to him as though he were in the planet Jupiter; and yet he seemed entirely at his ease; preserving the utmost serenity; content with his own companionship; always equal to himself.</p>
-          <p>Here was a man some twenty thousand miles from home, by the way of Cape Horn, that is—which was the only way he could get there—thrown among people as strange to him as though he were in the planet Jupiter; and yet he seemed entirely at his ease; preserving the utmost serenity; content with his own companionship; always equal to himself. Surely this was a touch of fine philosophy; though no doubt he had never heard there was such a thing as that.</p>
-          <a class='tutorial-link' href='https://medium.com/@PatrykZabielski/how-to-make-multi-layered-parallax-illustration-with-css-javascript-2b56883c3f27'>
-            Learn how to create this parallax effect
-          </a>
-        </div>
-      </div>
-    </section>
-  </div>
-</div>
-<script src='//assets.codepen.io/assets/common/stopExecutionOnTimeout-53beeb1a007ec32040abaf4c9385ebfc.js'></script>
-
-    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
-  </body>
-</html>
-
-<!-- <!DOCTYPE html>
-<html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset='UTF-8'>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <link href='https://fonts.googleapis.com/css?family=Playfair+Display' rel='stylesheet' type='text/css'>
+    <link rel='stylesheet prefetch' href='//codepen.io/assets/reset/normalize.css'>
+    <link rel='stylesheet prefetch' href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+    <link rel='stylesheet prefetch' href='//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.3/animate.min.css'>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300" rel="stylesheet">
 
-    <title>Zombie!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.3/animate.min.css">
-    
+
   </head>
+  <body>
+    <div id='zombie'>
+      <div class='layer-bg layer' data-depth='0.10' data-type='parallax'></div>
+      <div class='layer-1 layer' data-depth='0.20' data-type='parallax'></div>
+      <div class='layer-2 layer' data-depth='0.50' data-type='parallax'></div>
+      <div class='layer-3 layer' data-depth='0.80' data-type='parallax'></div>
+      <div class='layer-overlay layer' data-depth='0.85' data-type='parallax'></div>
+      <div class='layer-4 layer' data-depth='1.00' data-type='parallax'></div>
+    </div>
+    <div id='zombie-mobile'></div>
+    <div id='content'>
+      <div class='container'>
+        <section class='first-section'>
+          <div class='row'>
+            
+              <h1>"Cho­ciaż kro­wie dasz ka­kao, nie wy­doisz czekolady"</h1>
+            
+          </div>
+          <div class='row'>
+            <div class='col-sm-6'>
+              <%= render @view_module, @view_template, assigns %>
+              <p>And besides all this, there was a certain lofty bearing about the Pagan, which even his uncouthness could not altogether maim. He looked like a man who had never cringed and never had had a creditor. Whether it was, too, that his head being shaved, his forehead was drawn out in freer and brighter relief, and looked more expansive than it otherwise would, this I will not venture to decide; but certain it was his head was phrenologically an excellent one.</p>
+              
+            </div>
+            <div class='col-sm-6'>
+              <p>At first they are overawing; their calm self-collectedness of simplicity seems a Socratic wisdom. I had noticed also that Queequeg never consorted at all, or but very little, with the other seamen in the inn. He made no advances whatever; appeared to have no desire to enlarge the circle of his acquaintances. All this struck me as mighty singular; yet, upon second thoughts, there was something almost sublime in it. Here was a man some twenty thousand miles from home, by the way of Cape Horn, that is—which was the only way he could get there—thrown among people as strange to him as though he were in the planet Jupiter; and yet he seemed entirely at his ease; preserving the utmost serenity; content with his own companionship; always equal to himself.</p>
+              
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
 
-
-
-    
-    <div class="container">
-      <header class="header">
-        <nav role="navigation">
-          <ul class="nav nav-pills pull-right">
-            <li><a href="/">Home</a></li>
-          </ul>
-        </nav>
-        <span class="logo"></span>
-      </header>
-
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-
-      <main role="main">
-        <%= render @view_module, @view_template, assigns %>
-      </main>
-
-    </div>  /container 
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+    <script src='//assets.codepen.io/assets/common/stopExecutionOnTimeout-53beeb1a007ec32040abaf4c9385ebfc.js'></script>
   </body>
 </html>
--->
