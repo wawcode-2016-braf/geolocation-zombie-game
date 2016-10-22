@@ -25,17 +25,3 @@ config :logger, :console,
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
-
-# %% Coherence Configuration %%   Don't remove this line
-config :coherence,
-  user_schema: Zombie.User,
-  repo: Zombie.Repo,
-  module: Zombie,
-  logged_out_url: "/",
-  email_from: {"Your Name", "yourname@example.com"},
-  opts: [:authenticatable, :recoverable, :lockable, :trackable, :unlockable_with_token, :registerable]
-
-config :coherence, Zombie.Coherence.Mailer,
-  adapter: Swoosh.Adapters.Sendgrid,
-  api_key: "your api key here"
-# %% End Coherence Configuration %%
