@@ -1,5 +1,7 @@
 # Zombie
 
+[![Build Status](https://travis-ci.org/wawcode-2016-braf/geolocation-zombie-game.svg?branch=master)](https://travis-ci.org/wawcode-2016-braf/geolocation-zombie-game)
+
 To start your Phoenix app:
 
   * Install dependencies with `mix deps.get`
