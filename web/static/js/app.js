@@ -84,4 +84,4 @@ import $ from "jquery"
         });
     }
 
-    setInterval(getLocation, 2000);
+    setInterval(getLocation, 10000);
