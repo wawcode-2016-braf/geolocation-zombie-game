@@ -1,12 +1,3 @@
-// Brunch automatically concatenates all files in your
-// watched paths. Those paths can be configured at
-// config.paths.watched in "brunch-config.js".
-//
-// However, those files will only be executed if
-// explicitly imported. The only exception are files
-// in vendor, which are never wrapped in imports and
-// therefore are always executed.
-
 // Import dependencies
 //
 // If you no longer want to use a dependency, remember
@@ -44,19 +35,46 @@ import $ from "jquery"
       });
   }.call(this));
   
+    /* Logowanie / Rejestracja */
+    $(".form1").on('submit', function() {
+        var name = $("#name1").val();
+        $.getJSON("/api/token/" + name, function(data) {
+            window.location.href = "/game/?token=" + data.data.token;
+        });
+        return false;
+    });
 
-  $(".form1").on('submit', function() {
-      var name = $("#name1").val();
-      $.getJSON("/api/token/" + name, function(data) {
-          window.location.href = "/game/?token=" + data.data.token;
-      });
-      return false;
-  });
+    $(".form2").on('submit', function() {
+        var name = $("#name2").val();
+        $.getJSON("/api/token/" + name, function(data) {
+            window.location.href = "/game/?token=" + data.data.token;
+        });
+        return false;
+    });
 
-  $(".form2").on('submit', function() {
-      var name = $("#name2").val();
-      $.getJSON("/api/token/" + name, function(data) {
-          window.location.href = "/game/?token=" + data.data.token;
-      });
-      return false;
-  });
+    /* Pobieranie lokalizacji */
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(setPosition);
+        } else {
+            var x = document.getElementById("location");
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
+
+    function setPosition(position) {
+        var x = document.getElementById("location");
+        x.innerHTML = "Latitude: " + position.coords.latitude +
+        "<br>Longitude: " + position.coords.longitude;
+        $.ajax({
+            url: '/api/location/?token=' + token,
+            type: 'PUT',
+            data: "longitude=" + position.coords.longitude + "&latitude=" + position.coords.latitude,
+            success: function(data) {
+                console.log(data);
+            }
+        });
+    }
+
+    setInterval(getLocation, 2000);
