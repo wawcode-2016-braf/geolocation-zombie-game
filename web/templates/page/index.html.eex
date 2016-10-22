@@ -1,5 +1,36 @@
-<div class="row marketing">
-  <div class="col-lg-6">
-    <a href="/game">Go to Game</a>
+<section class='first-section'>
+  <div class='row'>
+    
+      <h1>"Walkę stworzyła na­tura, niena­wiść jest wy­nalaz­kiem człowieka"</h1>
+    
   </div>
-</div>
+  <div class='row'>
+    <div class='col-sm-6 lewa'>
+      <p class="p1">Zaloguj się!</p>
+      <form class="form1" name="nazwa" action="/game" method="get" ENCTYPE="multipart/form-data">
+        <label>nazwa użytkownika:</label><br><input type="text" name="login"><br><br>
+        <label>hasło:</label><br><input type="password" name="password"><br><br>
+        <input class="subm" type="submit" value="zaloguj">
+      </form><br><br>
+      <p class="p1">Dołącz do gry!</p>
+      <form class="form2" name="rej" action="/game" method="get" ENCTYPE="multipart/form-data">
+        <label for="email">email:</label><br><input type="email" id="email" name="email"><br><br>
+        <label>nazwa użytkownika:</label><br><input type="text" name="login"><br><br>
+        <label>hasło:</label><br><input type="password" name="password"><br><br>
+        <label>powtórz hasło:</label><br><input type="password" name="password"><br><br>
+        <input class="subm" type="submit" value="zarejestruj">
+      </form>
+    </div>
+    <div class='col-sm-6'>
+      <h3>Gra terenowa w Twoim mieście!</h3>
+      <p>Już dziś dołącz do milionów graczy i zmierz się z nimi w grze o PRZETRWANIE. Spróbuj swoich sił w ucieczce przed zombie lub poluj na ocalałych jako ożywiony potwór. Poznawaj ludzi, obmyślaj taktyki i zdobywaj punkty zwycięstwa.</p><br>
+      <h3>Poznawaj nowe miejsca!</h3>
+      <p>Każdego dnia lista lokalizaji na których odbywa się rozgrywka jest aktualizowana i zmieniana. Pozwala to urozmaicić grę, poznać nowych ludzi oraz zwiedzić nowy fragment miast lub park miejski. Pozwól sobie poznać Warszawę i dołącz do gry. </p><br>
+      <h3>Wymieniaj punkty na nagrody i zniżki!</h3>
+      <p>Współpracujące z nami firmy oferują wymianę zdobytych w grze punktów na liczne zniżki, bony i upominki. Nie przegap promocji i korzystaj z efektów swoich umiejętności w grze.</p><br>
+      <a class='tutorial-link' href='https://medium.com/@PatrykZabielski/how-to-make-multi-layered-parallax-illustration-with-css-javascript-2b56883c3f27'>
+        regulamin<br><br>
+      </a>
+    </div>
+  </div>
+</section>

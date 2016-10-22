@@ -9,46 +9,29 @@
     <link rel='stylesheet prefetch' href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
     <link rel='stylesheet prefetch' href='//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.3/animate.min.css'>
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300" rel="stylesheet">
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
-
   </head>
   <body>
-    <div id='zombie'>
-      <div class='layer-bg layer' data-depth='0.10' data-type='parallax'></div>
-      <div class='layer-1 layer' data-depth='0.20' data-type='parallax'></div>
-      <div class='layer-2 layer' data-depth='0.50' data-type='parallax'></div>
-      <div class='layer-3 layer' data-depth='0.80' data-type='parallax'></div>
-      <div class='layer-overlay layer' data-depth='0.85' data-type='parallax'></div>
-      <div class='layer-4 layer' data-depth='1.00' data-type='parallax'></div>
+  <div id='zombie'>
+    <div class='layer-bg layer' data-depth='0.10' data-type='parallax'></div>
+    <div class='layer-1 layer' data-depth='0.20' data-type='parallax'></div>
+    <div class='layer-2 layer' data-depth='0.50' data-type='parallax'></div>
+    <div class='layer-3 layer' data-depth='0.80' data-type='parallax'></div>
+    <div class='layer-overlay layer' data-depth='0.85' data-type='parallax'></div>
+    <div class='layer-4 layer' data-depth='1.00' data-type='parallax'></div>
+  </div>
+  <div id='zombie-mobile'></div>
+  <div id='content'>
+    <div class='container'>
+      <%= render @view_module, @view_template, assigns %>
     </div>
-    <div id='zombie-mobile'></div>
-    <div id='content'>
-      <div class='container'>
-        <section class='first-section'>
-          <div class='row'>
-            
-              <h1>"Cho­ciaż kro­wie dasz ka­kao, nie wy­doisz czekolady"</h1>
-            
-          </div>
-          <div class='row'>
-            <div class='col-sm-6'>
-              <%= render @view_module, @view_template, assigns %>
-              <p>And besides all this, there was a certain lofty bearing about the Pagan, which even his uncouthness could not altogether maim. He looked like a man who had never cringed and never had had a creditor. Whether it was, too, that his head being shaved, his forehead was drawn out in freer and brighter relief, and looked more expansive than it otherwise would, this I will not venture to decide; but certain it was his head was phrenologically an excellent one.</p>
-              
-            </div>
-            <div class='col-sm-6'>
-              <p>At first they are overawing; their calm self-collectedness of simplicity seems a Socratic wisdom. I had noticed also that Queequeg never consorted at all, or but very little, with the other seamen in the inn. He made no advances whatever; appeared to have no desire to enlarge the circle of his acquaintances. All this struck me as mighty singular; yet, upon second thoughts, there was something almost sublime in it. Here was a man some twenty thousand miles from home, by the way of Cape Horn, that is—which was the only way he could get there—thrown among people as strange to him as though he were in the planet Jupiter; and yet he seemed entirely at his ease; preserving the utmost serenity; content with his own companionship; always equal to himself.</p>
-              
-            </div>
-          </div>
-        </section>
-      </div>
-    </div>
+    <footer>
+      <br><br><br><p>copyright &copy; BRA+f Studio | <a href="/">Home</a> | <a href="/game">Game</a></p>
+    </footer>
+  </div>
 
-    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
-    <script src='//assets.codepen.io/assets/common/stopExecutionOnTimeout-53beeb1a007ec32040abaf4c9385ebfc.js'></script>
+  <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+  <script src='//assets.codepen.io/assets/common/stopExecutionOnTimeout-53beeb1a007ec32040abaf4c9385ebfc.js'></script>
   </body>
 </html>

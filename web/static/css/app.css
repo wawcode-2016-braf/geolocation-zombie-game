@@ -46,8 +46,8 @@ body {
 
 h1 {
   line-height: 120%;
-  margin-bottom: 30px;
-  font-size: 50px;
+  margin-bottom: 50px;
+  font-size: 45px;
   text-align: center;
 }
 
@@ -62,7 +62,7 @@ p {
 }
 
 .layer-bg {
-  background-image: url("/images/tlo02.jpg"); /*tlo nieruchome*/
+  background-image: url("/images/tlo03.jpg"); /*tlo nieruchome*/
 }
 
 /* ruchome budynki */
@@ -86,20 +86,59 @@ p {
   background-position: bottom;
 }
 
-.layer-overlay {
-  background-image: url("");
-  
+@media only screen and (max-width: 768px) {
+
+  #zombie {
+  height: 300px;
+  overflow: hidden;
+  position: relative;
 }
 
-@media only screen and (max-width: 768px) {
-  #zombie {
-    display: none;
-  }
-
-  #zombie-mobile {
+ /* #zombie-mobile {
     display: block;
   }
+
+  #zombie, .layer {
+  min-height: 300px;
+}*/
+
+.layer {
+  background-position: top center;
+  background-size: auto;
+  background-repeat: no-repeat;
+  width: 500px;
+  height: 300px;
+  position: fixed;
+  z-index: -1;
 }
+
+.layer-bg {
+  background-image: url("/images/mtlo2.jpg");
+  background-position: top center;
+}
+
+.layer-1 {
+  background-image: url("/images/mzombie3.png"); 
+  background-position: top center;
+}
+
+.layer-2 {
+  background-image: url("/images/mzombie2.png");
+  background-position: top center;
+}
+
+.layer-3 {
+  background-image: url("/images/mzombie1.png");
+  background-position: top center;
+}
+
+.layer-4 {
+  background-image: url("/images/mfront.png");
+  background-position: top center;
+}
+
+}
+} 
 
 .tutorial-link {
   color: #fff;
@@ -109,4 +148,51 @@ p {
 }
 .tutorial-link:hover {
   color: #ede0d5;
+}
+
+input {
+    background-color: #210002;
+    width: 200px;
+    border: 1px solid;
+}
+
+.form1 {
+    font-size: 15px;
+}
+
+.p1 {
+    font-size: 28px;
+    color: white;
+}
+
+.lewa {
+    padding-left: 20px;
+}
+
+.input1 {
+    width: 100px;
+}
+
+.form2 {
+    font-size: 15px;
+}
+
+.subm {
+    border: 0px;
+}
+
+.subm:hover {
+    background-color: #321113;
+}
+
+footer {
+    height: 100px;
+    background-color: #321113;
+    text-align: center;
+    font-size: 15px;
+}
+
+h3 {
+    color: white;
+    padding-bottom: 20px;
 }
