@@ -1,7 +1,7 @@
 defmodule Zombie.RoomChannel do
   use Zombie.Web, :channel
 
-  def join("room:lobby", payload, socket) do
+  def join("room:" <> _room, payload, socket) do
     if authorized?(payload) do
       {:ok, socket}
     else

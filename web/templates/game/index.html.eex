@@ -1,7 +1,10 @@
 <script>
 var token = "<%= @token %>";
 var name = "<%= @user.name %>";
+var isZombie = <%= @zombie? %>;
 </script>
+
+You are <%= if @zombie? do "Zombie" else "Human" end %>!
 
 <p id="location"></p>
 

@@ -64,4 +64,17 @@ channel.on("location", location => {
   setMarker(location, location.name);
 })
 
+if (name != '') {
+  console.log(name)
+  let channel = socket.channel("room:" + name, {})
+  channel.join()
+    .receive("ok", resp => { console.log("Joined successfully private channel", resp) })
+    .receive("error", resp => { console.log("Unable to join private channel", resp) })
+
+  channel.on("location", location => {
+    console.log(location)
+    setMarker(location, location.name);
+  })
+}
+
 export default socket

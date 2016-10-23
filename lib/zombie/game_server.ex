@@ -9,7 +9,7 @@ defmodule Zombie.GameServer do
 
   @immune_time 120_000 # miliseconds
   @distance 50 # meters
-  @human_reveal_time 60 # seconds 
+  @human_reveal_interval 60 # seconds 
   @zombies_ratio 5 # zombies per human
 
   defmodule State do
@@ -40,7 +40,7 @@ defmodule Zombie.GameServer do
   def handle_info(:loop, %State{} = state) do
     Process.send_after(self, :loop, 10_000)
 
-    IO.inspect state
+    Logger.info("#{inspect state}")
 
     {:noreply, state}
   end
@@ -56,6 +56,22 @@ defmodule Zombie.GameServer do
   def handle_info({:check_colisions, %User{} = user}, %State{} = state) do
     # TODO: Check if the user colides with any other user
     # Colisions count only if time passed from start is bigger than @immune_time
+
+    {:noreply, state}
+  end
+  def handle_info({:notify_user_move, user, longitude, latitude}, %State{players: players} = state) do
+    player = Map.get(players, user.id)
+    if (player.zombie?) do
+      Zombie.Endpoint.broadcast("room:lobby", "location", %{name: user.name, id: user.id, lng: longitude, lat: latitude, zombie: true})
+    else
+      players
+      |> Map.to_list
+      |> Enum.each(fn {_id, p} -> 
+        if !p.zombie? do
+          Zombie.Endpoint.broadcast("room:" <> p.user.name, "location", %{name: user.name, id: user.id, lng: longitude, lat: latitude, zombie: false})
+        end
+      end)
+    end
 
     {:noreply, state}
   end
@@ -84,6 +100,9 @@ defmodule Zombie.GameServer do
 
     {:reply, :ok, %State{state | players: players}}
   end
+  def handle_call({:player_info, %User{} = user}, _from, %State{players: players} = state) do
+    {:reply, Map.get(players, user.id), state}
+  end
 
   def user_join(%User{} = user) do
     GenServer.call(__MODULE__, {:join, user})
@@ -94,11 +113,17 @@ defmodule Zombie.GameServer do
   end
 
   def user_move(%User{} = user, %{"longitude" => longitude, "latitude" => latitude}) do
+    # Update user position in Game and database
     send(__MODULE__, {:update_position, user, longitude, latitude})
-    # TODO: Send channel notification to proper users about location change
-    Zombie.Endpoint.broadcast("room:lobby", "location", %{name: user.name, id: user.id, lng: longitude, lat: latitude})
+    # Send channel notification to proper users about location change
+    send(__MODULE__, {:notify_user_move, user, longitude, latitude})
+    # Check players colisions and report game result
     send(__MODULE__, {:check_colisions, user})
     :ok
+  end
+
+  def player_info(%User{} = user) do
+    GenServer.call(__MODULE__, {:player_info, user})
   end
 
   # randomly give players role for being human or zombie
