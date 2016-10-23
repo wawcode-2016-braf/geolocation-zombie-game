@@ -10,6 +10,7 @@ var name = "<%= @user.name %>";
 
 <script>
 var map = {};
+var markers = {};
 
 function myMap() {
   var mapCanvas = document.getElementById("map");
@@ -20,15 +21,21 @@ function myMap() {
   map = new google.maps.Map(mapCanvas, mapOptions);
 }
 
-function setMarker(position) {
+function setMarker(position, title) {
   var myLatLng = {lat: position.coords.latitude, lng: position.coords.longitude};
+
+  if (markers[title]) {
+    markers[title].setMap(null);
+  }
 
   var marker = new google.maps.Marker({
     position: myLatLng,
-    title: 'Hello World!'
+    title: title,
+    label: title
   });
 
   marker.setMap(map);
+  markers[title] = marker;
 }
 
 function setCenter(position) {

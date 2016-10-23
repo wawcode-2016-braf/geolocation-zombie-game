@@ -83,7 +83,7 @@ import $ from "jquery"
             }
         });
 
-        setMarker(position);
+        setMarker(position, name);
         setCenter(position);
     }
 
