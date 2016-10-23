@@ -138,24 +138,24 @@ defmodule Zombie.GameServer do
 
     {:noreply, state}
   end
-  def handle_info({:new_game, player}, %State{players: players} = state) do
-    IO.puts "==========NEW GAME============="
-    IO.puts "Winner: " <> player.user.name
+  # def handle_info({:new_game, player}, %State{players: players} = state) do
+  #   IO.puts "==========NEW GAME============="
+  #   IO.puts "Winner: " <> player.user.name
 
-    players
-    |> Map.to_list
-    |> Enum.each(fn {_id, p} -> 
-        if player.user.id != p.user.id do
-          Zombie.Endpoint.broadcast("room:" <> p.user.name, "gameover", %{})
-        else
-          Zombie.Endpoint.broadcast("room:" <> p.user.name, "win", %{})
-        end
-      end)
+  #   players
+  #   |> Map.to_list
+  #   |> Enum.each(fn {_id, p} -> 
+  #       if player.user.id != p.user.id do
+  #         Zombie.Endpoint.broadcast("room:" <> p.user.name, "gameover", %{})
+  #       else
+  #         Zombie.Endpoint.broadcast("room:" <> p.user.name, "win", %{})
+  #       end
+  #     end)
 
-    # Hacky: Removing all users - we will refresh their webpages
-    player = %Player{player | zombie?: false}
-    {:noreply, %State{state | players: %{player.user.id => player}, start_date: DateTime.utc_now(), last_visible: DateTime.utc_now()}}
-  end
+  #   # Hacky: Removing all users - we will refresh their webpages
+  #   player = %Player{player | zombie?: false}
+  #   {:noreply, %State{state | players: %{player.user.id => player}, start_date: DateTime.utc_now(), last_visible: DateTime.utc_now()}}
+  # end
 
   def handle_call({:join, %User{} = user}, _from, %State{players: players} = state) do
 
