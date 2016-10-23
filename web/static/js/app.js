@@ -61,7 +61,13 @@ import socket from "./socket"
 
     /* Pobieranie lokalizacji */
 
-    function getLocation() {
+    // hack to make it center only once
+    var latlngc = 0;
+
+    function getLocation(center) {
+        if (center) {
+            latlngc = 0;
+        }
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(setPosition);
         } else {
@@ -70,8 +76,6 @@ import socket from "./socket"
         }
     }
 
-    // hack to make it center only once
-    var latlngc = 0;
 
     function setPosition(position) {
         var x = document.getElementById("location");
@@ -96,6 +100,8 @@ import socket from "./socket"
         latlngc++;
 
     }
+
+    window.getLocation = getLocation;
 
     setInterval(getLocation, 5000);
     getLocation();
