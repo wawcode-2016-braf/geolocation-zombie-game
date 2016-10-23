@@ -82,6 +82,10 @@ import $ from "jquery"
                 console.log(data);
             }
         });
+
+        setMarker(position);
+        setCenter(position);
     }
 
     setInterval(getLocation, 10000);
+    getLocation();
