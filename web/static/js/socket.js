@@ -66,7 +66,7 @@ channel.on("location", location => {
 channel.on("locations", l => {
   for (var i = 0; i < l.data.length; i++) {
     var loc = l.data[i];
-    setMarker(loc, loc.name, loc.data.zombie);
+    setMarker(loc, loc.name, loc.zombie);
   }
 })
 
@@ -84,7 +84,7 @@ if (name != '') {
   channel.on("locations", l => {
     for (var i = 0; i < l.data.length; i++) {
       var loc = l.data[i];
-      setMarker(loc, loc.name, loc.data.zombie);
+      setMarker(loc, loc.name, loc.zombie);
     }
   })
 }
