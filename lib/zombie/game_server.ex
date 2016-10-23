@@ -7,9 +7,9 @@ defmodule Zombie.GameServer do
 
   alias Zombie.{User, Location, Repo, PlayerView}
 
-  @immune_time 60 # seconds
+  @immune_time 120 # seconds
   @distance 25 # meters
-  @human_reveal_interval 30 # seconds 
+  @human_reveal_interval 60 # seconds 
   @zombies_ratio 5 # zombies per human
 
   defmodule State do

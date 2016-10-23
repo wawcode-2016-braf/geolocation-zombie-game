@@ -13,12 +13,17 @@ var isZombie = <%= @zombie? %>;
     <p>Posiadasz <span class="white">185</span> punktów</p>
     <button class="buttongame" width="200">WYLOGUJ</button><br>
     <button class="buttongame" onclick="window.getLocation(true);" width="200">WYŚRODKUJ MAPĘ</button>
-    <p id="location"></p>
+    <p style="display: none;" id="location"></p>
+    <div id="timerow">
+      Game is starting in <span id="time">02:00</span>.
+    </div>
   </div>
   <div class="col-sm-9">
      <div id="map">
   </div>
 </div>
+
+<script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
 
 <script>
 var map = {};
@@ -151,6 +156,36 @@ function setMarker(position, title, zombie) {
 function setCenter(position) {
   map.setCenter(position);
 }
+
+function startTimer(duration, display) {
+    var timer = duration, minutes, seconds;
+    setInterval(function () {
+        minutes = parseInt(timer / 60, 10)
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.text(minutes + ":" + seconds);
+
+        if (--timer < 0) {
+            timer = duration;
+            $("#timerow").hide();
+        }
+    }, 1000);
+}
+
+    $.getJSON("/api/game?token=" + token, function(data) {
+        console.log(data.info.start_date);
+        var time = 120 - Math.round((new Date() - new Date(data.info.start_date)) / 1000);
+        console.log(time);
+        if (time > 0) {
+          display = $('#time');
+          startTimer(time, display);
+        } else {
+          $("#timerow").hide();
+        }
+    });
 </script>
 
 <script src="https://maps.googleapis.com/maps/api/js?callback=myMap&key=AIzaSyAKByWukzmVD9CrXnWmjl5R5aDXRdu9caU"></script>
