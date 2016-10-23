@@ -12,4 +12,11 @@ defmodule Zombie.ApiController do
     GameServer.user_move(user, params)
     render conn, "ok.json"
   end
+
+  def game(conn, _params) do
+    user = conn.assigns[:current_user]
+    GameServer.user_join(user)
+    info = GameServer.game_info(user)
+    render conn, "info.json", info: info
+  end
 end

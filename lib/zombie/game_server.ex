@@ -29,7 +29,7 @@ defmodule Zombie.GameServer do
 
   def handle_info(:start, %State{} = state) do
     Logger.info "Game is starting"
-    state = %State{state | players: %{}, start_date: DateTime.utc_now()}
+    state = %State{state | players: %{}, start_date: DateTime.utc_now(), last_visible: DateTime.utc_now()}
 
     # TODO: Load state from database
 
@@ -103,6 +103,32 @@ defmodule Zombie.GameServer do
   def handle_call({:player_info, %User{} = user}, _from, %State{players: players} = state) do
     {:reply, Map.get(players, user.id), state}
   end
+  def handle_call({:game_info, %User{} = user}, _from, %State{} = state) do
+
+    player = Map.get(state.players, user.id)
+
+    players = 
+      if player.zombie? do
+        []
+      else
+        state.players
+        |> Map.to_list
+        |> Enum.map(fn {_id, p} -> %{
+          name: p.user.name,
+          is_zombie: p.zombie?,
+          position: p.position
+        } end)
+      end
+
+    info = %{
+      players: players,
+      start_date: state.start_date,
+      last_visible: state.last_visible,
+      next_visible: ((state.last_visible |> DateTime.to_unix) + @human_reveal_interval) |> DateTime.from_unix!
+    }
+
+    {:reply, info, state}
+  end
 
   def user_join(%User{} = user) do
     GenServer.call(__MODULE__, {:join, user})
@@ -124,6 +150,10 @@ defmodule Zombie.GameServer do
 
   def player_info(%User{} = user) do
     GenServer.call(__MODULE__, {:player_info, user})
+  end
+
+  def game_info(%User{} = user) do
+    GenServer.call(__MODULE__, {:game_info, user})
   end
 
   # randomly give players role for being human or zombie

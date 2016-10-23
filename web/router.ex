@@ -51,5 +51,6 @@ defmodule Zombie.Router do
 
     resources "/users", UserController, except: [:new, :edit]
     put "/location", ApiController, :save_location
+    get "/game", ApiController, :game
   end
 end
