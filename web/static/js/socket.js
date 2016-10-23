@@ -60,8 +60,15 @@ channel.join()
   .receive("error", resp => { console.log("Unable to join", resp) })
 
 channel.on("location", location => {
-  console.log(location)
-  setMarker(location, location.name);
+  setMarker(location.data, location.data.name);
+})
+
+channel.on("locations", l => {
+  for (var i = 0; i < l.data.length; i++) {
+    var loc = l.data[i];
+    console.log(loc);
+    setMarker(loc, loc.name);
+  }
 })
 
 if (name != '') {
@@ -72,8 +79,13 @@ if (name != '') {
     .receive("error", resp => { console.log("Unable to join private channel", resp) })
 
   channel.on("location", location => {
-    console.log(location)
-    setMarker(location, location.name);
+    setMarker(location.data, location.data.name);
+  })
+
+  channel.on("locations", locations => {
+    for (var location in locations.data) {
+      setMarker(location, location.name);
+    }
   })
 }
 
