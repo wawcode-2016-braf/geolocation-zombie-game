@@ -7,7 +7,7 @@ var isZombie = <%= @zombie? %>;
 <div class='row'>
   <div class="col-sm-3 lewagame">
     
-    <img class="loginimage" src="/images/loginuser1.jpg">
+    <img class="loginimage" src="/images/loginuser<%= if @zombie? do "2" else "1" end %>.jpg">
     <p>Witaj <span class="white"><%= @user.name %></span> !</p>
     <p>Grasz jako <span class="white"><%= if @zombie? do "zombie" else "ocalały" end %></span></p>
     <p>Posiadasz <span class="white">185</span> punktów</p>
