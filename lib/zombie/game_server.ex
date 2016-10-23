@@ -110,7 +110,7 @@ defmodule Zombie.GameServer do
       |> Enum.each(fn {_id, p} -> 
         if player.user.id != p.user.id and player.zombie? != p.zombie? do
           if IO.inspect(Distance.GreatCircle.distance(player.position, p.position)) < @distance do
-            Process.send_after(__MODULE__, {:new_game, if player.zombie? do player else p end}, 50)
+            #Process.send_after(__MODULE__, {:new_game, if player.zombie? do player else p end}, 50)
           end
         end
       end)
