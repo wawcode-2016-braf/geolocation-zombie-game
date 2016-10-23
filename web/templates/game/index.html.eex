@@ -4,7 +4,7 @@ var name = "<%= @user.name %>";
 var isZombie = <%= @zombie? %>;
 </script>
 
-<div class='row'>
+<div class='row' id="game">
   <div class="col-sm-3 lewagame">
     
     <img class="loginimage" src="/images/loginuser<%= if @zombie? do "2" else "1" end %>.jpg">

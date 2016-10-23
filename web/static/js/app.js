@@ -46,7 +46,7 @@ import socket from "./socket"
     $(".form1").on('submit', function() {
         var name = $("#name1").val();
         $.getJSON("/api/token/" + name, function(data) {
-            window.location.href = "/game/?token=" + data.data.token;
+            window.location.href = "/game/?token=" + data.data.token + "#game";
         });
         return false;
     });
@@ -54,7 +54,7 @@ import socket from "./socket"
     $(".form2").on('submit', function() {
         var name = $("#name2").val();
         $.getJSON("/api/token/" + name, function(data) {
-            window.location.href = "/game/?token=" + data.data.token;
+            window.location.href = "/game/?token=" + data.data.token + "#game";
         });
         return false;
     });
