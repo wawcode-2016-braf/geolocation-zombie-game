@@ -22,14 +22,12 @@ function myMap() {
 }
 
 function setMarker(position, title) {
-  var myLatLng = {lat: position.coords.latitude, lng: position.coords.longitude};
-
   if (markers[title]) {
     markers[title].setMap(null);
   }
 
   var marker = new google.maps.Marker({
-    position: myLatLng,
+    position: position,
     title: title,
     label: title
   });
@@ -39,11 +37,7 @@ function setMarker(position, title) {
 }
 
 function setCenter(position) {
-  var pos = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude
-            };
-  map.setCenter(pos);
+  map.setCenter(position);
 }
 </script>
 

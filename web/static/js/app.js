@@ -10,7 +10,7 @@ import $ from "jquery"
 // Local files can be imported directly using relative
 // paths "./socket" or full ones "web/static/js/socket".
 
-// import socket from "./socket"
+import socket from "./socket"
 
 (function () {
       window.addEventListener('scroll', function (event) {
@@ -83,9 +83,11 @@ import $ from "jquery"
             }
         });
 
-        setMarker(position, name);
-        setCenter(position);
+        var latlng = {lat: position.coords.latitude, lng: position.coords.longitude};
+
+        setMarker(latlng, name);
+        setCenter(latlng);
     }
 
-    setInterval(getLocation, 10000);
+    setInterval(getLocation, 5000);
     getLocation();

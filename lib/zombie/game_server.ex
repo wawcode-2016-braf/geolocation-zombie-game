@@ -96,6 +96,7 @@ defmodule Zombie.GameServer do
   def user_move(%User{} = user, %{"longitude" => longitude, "latitude" => latitude}) do
     send(__MODULE__, {:update_position, user, longitude, latitude})
     # TODO: Send channel notification to proper users about location change
+    Zombie.Endpoint.broadcast("room:lobby", "location", %{name: user.name, id: user.id, lng: longitude, lat: latitude})
     send(__MODULE__, {:check_colisions, user})
     :ok
   end

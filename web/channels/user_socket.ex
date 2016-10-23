@@ -2,7 +2,7 @@ defmodule Zombie.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "room:*", Zombie.RoomChannel
+  channel "room:*", Zombie.RoomChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket, timeout: 45_000
