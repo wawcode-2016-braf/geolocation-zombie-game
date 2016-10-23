@@ -113,15 +113,34 @@ function myMap() {
   map = new google.maps.Map(mapCanvas, mapOptions);
 }
 
-function setMarker(position, title) {
+function setMarker(position, title, zombie) {
   if (markers[title]) {
     markers[title].setMap(null);
+  }
+
+  var image = {
+      url: "/images/pointuser1.png",
+      scaledSize: new google.maps.Size(36, 36)
+    };
+  if (zombie) {
+    image = {
+      url: "/images/pointuser2.png",
+      scaledSize: new google.maps.Size(36, 36)
+    };
+  }
+  
+  if (title == name) {
+    image = {
+      url: "/images/pointuser3.png",
+      scaledSize: new google.maps.Size(24, 24)
+    };
   }
 
   var marker = new google.maps.Marker({
     position: position,
     title: title,
-    label: title
+    //label: title,
+    icon: image
   });
 
   marker.setMap(map);
