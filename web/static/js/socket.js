@@ -66,7 +66,6 @@ channel.on("location", location => {
 channel.on("locations", l => {
   for (var i = 0; i < l.data.length; i++) {
     var loc = l.data[i];
-    console.log(loc);
     setMarker(loc, loc.name);
   }
 })
@@ -82,9 +81,10 @@ if (name != '') {
     setMarker(location.data, location.data.name);
   })
 
-  channel.on("locations", locations => {
-    for (var location in locations.data) {
-      setMarker(location, location.name);
+  channel.on("locations", l => {
+    for (var i = 0; i < l.data.length; i++) {
+      var loc = l.data[i];
+      setMarker(loc, loc.name);
     }
   })
 }

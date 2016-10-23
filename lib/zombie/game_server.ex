@@ -49,7 +49,6 @@ defmodule Zombie.GameServer do
           players
           |> Map.to_list
           |> Enum.filter_map(fn {_id, p} -> !p.zombie? end, fn {_id, p} -> %Player{p | last_position: p.position} end)
-          |> IO.inspect
 
         Zombie.Endpoint.broadcast("room:lobby", "locations", 
           %{data: PlayerView.render("players.json", %{players: humans})})
@@ -67,7 +66,21 @@ defmodule Zombie.GameServer do
 
     # TODO: Send to all users information about zombies constantly
 
-    {:noreply, state}
+    zombies =
+      state.players
+      |> Map.to_list
+      |> Enum.filter_map(fn {_id, p} -> p.zombie? end, fn {_id, p} -> %Player{p | last_position: p.position} end)
+
+    Zombie.Endpoint.broadcast("room:lobby", "locations", 
+      %{data: PlayerView.render("players.json", %{players: zombies})})
+
+    players = Map.merge(state.players, 
+      zombies
+      |> Enum.map(fn z -> {z.user.id, z} end)
+      |> Enum.into(%{})
+    )
+
+    {:noreply, %State{state | players: players}}
   end
   def handle_info({:update_position, %User{} = user, longitude, latitude}, %State{players: players} = state) do
     # Save player's location

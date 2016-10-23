@@ -84,10 +84,7 @@ import socket from "./socket"
         $.ajax({
             url: '/api/location/?token=' + token,
             type: 'PUT',
-            data: "longitude=" + position.coords.longitude + "&latitude=" + position.coords.latitude,
-            success: function(data) {
-                console.log(data);
-            }
+            data: "longitude=" + position.coords.longitude + "&latitude=" + position.coords.latitude
         });
 
         var latlng = {lat: position.coords.latitude, lng: position.coords.longitude};
