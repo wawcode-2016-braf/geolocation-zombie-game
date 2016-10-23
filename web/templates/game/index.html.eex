@@ -15,7 +15,7 @@ var isZombie = <%= @zombie? %>;
     <button class="buttongame" onclick="window.getLocation(true);" width="200">WYŚRODKUJ MAPĘ</button>
     <p style="display: none;" id="location"></p>
     <div id="timerow">
-      Game is starting in <span id="time">02:00</span>.
+      Gra zaczyna się za <span id="time">02:00</span>.
     </div>
   </div>
   <div class="col-sm-9">
