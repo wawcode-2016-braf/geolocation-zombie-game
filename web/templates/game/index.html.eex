@@ -22,6 +22,7 @@ var name = "<%= @user.name %>";
 
 <script>
 var map = {};
+var markers = {};
 
 function myMap() {
   var mapCanvas = document.getElementById("map");
@@ -32,23 +33,23 @@ function myMap() {
   map = new google.maps.Map(mapCanvas, mapOptions);
 }
 
-function setMarker(position) {
-  var myLatLng = {lat: position.coords.latitude, lng: position.coords.longitude};
+function setMarker(position, title) {
+  if (markers[title]) {
+    markers[title].setMap(null);
+  }
 
   var marker = new google.maps.Marker({
-    position: myLatLng,
-    title: 'Hello World!'
+    position: position,
+    title: title,
+    label: title
   });
 
   marker.setMap(map);
+  markers[title] = marker;
 }
 
 function setCenter(position) {
-  var pos = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude
-            };
-  map.setCenter(pos);
+  map.setCenter(position);
 }
 </script>
 

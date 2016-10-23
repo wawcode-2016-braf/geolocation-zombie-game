@@ -10,7 +10,7 @@ import $ from "jquery"
 // Local files can be imported directly using relative
 // paths "./socket" or full ones "web/static/js/socket".
 
-// import socket from "./socket"
+import socket from "./socket"
 
 (function () {
       window.addEventListener('scroll', function (event) {
@@ -70,6 +70,9 @@ import $ from "jquery"
         }
     }
 
+    // hack to make it center only once
+    var latlngc = 0;
+
     function setPosition(position) {
         var x = document.getElementById("location");
         x.innerHTML = "Latitude: " + position.coords.latitude +
@@ -83,9 +86,16 @@ import $ from "jquery"
             }
         });
 
-        setMarker(position);
-        setCenter(position);
+        var latlng = {lat: position.coords.latitude, lng: position.coords.longitude};
+
+        setMarker(latlng, name);
+        if (latlngc == 0) {
+            setCenter(latlng);
+        }
+
+        latlngc++;
+
     }
 
-    setInterval(getLocation, 10000);
+    setInterval(getLocation, 5000);
     getLocation();
