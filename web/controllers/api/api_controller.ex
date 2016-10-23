@@ -9,6 +9,7 @@ defmodule Zombie.ApiController do
     save_location(conn, params)
   end
   def save_location(%{assigns: %{current_user: user}} = conn, %{"longitude" => _lon, "latitude" => _lat} = params) do
+    GameServer.user_join(user)
     GameServer.user_move(user, params)
     render conn, "ok.json"
   end
