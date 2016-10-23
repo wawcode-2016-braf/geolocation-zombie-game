@@ -5,11 +5,11 @@ defmodule Zombie.GameServer do
   use GenServer
   require Logger
 
-  alias Zombie.{User, Location, Repo}
+  alias Zombie.{User, Location, Repo, PlayerView}
 
   @immune_time 120_000 # miliseconds
   @distance 50 # meters
-  @human_reveal_interval 60 # seconds 
+  @human_reveal_interval 30 # seconds 
   @zombies_ratio 5 # zombies per human
 
   defmodule State do
@@ -17,7 +17,7 @@ defmodule Zombie.GameServer do
   end
 
   defmodule Player do
-    defstruct [:user, :zombie?, :position]
+    defstruct [:user, :zombie?, :position, :last_position]
   end
 
   def start_link(), do: GenServer.start_link(__MODULE__, [], name: __MODULE__)
@@ -33,20 +33,61 @@ defmodule Zombie.GameServer do
 
     # TODO: Load state from database
 
-    Process.send_after(self, :loop, 5_000)
+    Process.send_after(self, :loop, 2_000)
     
 		{:noreply, state}
 	end
-  def handle_info(:loop, %State{} = state) do
-    Process.send_after(self, :loop, 10_000)
+  def handle_info(:loop, %State{players: players} = state) do
+    Process.send_after(self, :loop, 4_000)
 
-    Logger.info("#{inspect state}")
+    state = 
+      if (state.last_visible |> DateTime.to_unix) + @human_reveal_interval < (DateTime.utc_now() |> DateTime.to_unix) do
+        Logger.debug("#{inspect state}")
+        # Send to all users information about humans
 
-    {:noreply, state}
+        humans =
+          players
+          |> Map.to_list
+          |> Enum.filter_map(fn {_id, p} -> !p.zombie? end, fn {_id, p} -> %Player{p | last_position: p.position} end)
+
+        Zombie.Endpoint.broadcast("room:lobby", "locations", 
+          %{data: PlayerView.render("players.json", %{players: humans})})
+
+        players = Map.merge(players, 
+            humans
+            |> Enum.map(fn h -> {h.user.id, h} end)
+            |> Enum.into(%{})
+          )
+          
+        %State{state | last_visible: DateTime.utc_now, players: players}
+      else
+        state
+      end
+
+    # TODO: Send to all users information about zombies constantly
+
+    zombies =
+      state.players
+      |> Map.to_list
+      |> Enum.filter_map(fn {_id, p} -> p.zombie? end, fn {_id, p} -> %Player{p | last_position: p.position} end)
+
+    Zombie.Endpoint.broadcast("room:lobby", "locations", 
+      %{data: PlayerView.render("players.json", %{players: zombies})})
+
+    players = Map.merge(state.players, 
+      zombies
+      |> Enum.map(fn z -> {z.user.id, z} end)
+      |> Enum.into(%{})
+    )
+
+    {:noreply, %State{state | players: players}}
   end
   def handle_info({:update_position, %User{} = user, longitude, latitude}, %State{players: players} = state) do
     # Save player's location
-    players = Map.update!(players, user.id, fn player -> %Player{player | position: {longitude, latitude}} end)
+    players = Map.update!(players, user.id, fn player -> 
+      %Player{player | position: {longitude, latitude}, 
+      last_position: if player.zombie? do {longitude, latitude} else if player.last_position == nil do {longitude, latitude} else player.last_position end end} 
+    end)
 
     changeset = Location.changeset(%Location{}, %{"lat" => Decimal.new(latitude), "lon" => longitude, "user_id" => user.id})
     Repo.insert!(changeset)
@@ -59,16 +100,18 @@ defmodule Zombie.GameServer do
 
     {:noreply, state}
   end
-  def handle_info({:notify_user_move, user, longitude, latitude}, %State{players: players} = state) do
+  def handle_info({:notify_user_move, user}, %State{players: players} = state) do
     player = Map.get(players, user.id)
     if (player.zombie?) do
-      Zombie.Endpoint.broadcast("room:lobby", "location", %{name: user.name, id: user.id, lng: longitude, lat: latitude, zombie: true})
+      Zombie.Endpoint.broadcast("room:lobby", "location",
+        %{data: PlayerView.render("player.json", %{player: player})})
     else
       players
       |> Map.to_list
       |> Enum.each(fn {_id, p} -> 
         if !p.zombie? do
-          Zombie.Endpoint.broadcast("room:" <> p.user.name, "location", %{name: user.name, id: user.id, lng: longitude, lat: latitude, zombie: false})
+          Zombie.Endpoint.broadcast("room:" <> p.user.name, "location", 
+            %{data: PlayerView.render("player.json", %{player: player})})
         end
       end)
     end
@@ -109,7 +152,13 @@ defmodule Zombie.GameServer do
 
     players = 
       if player.zombie? do
-        []
+        state.players
+        |> Map.to_list
+        |> Enum.map(fn {_id, p} -> %{
+          name: p.user.name,
+          is_zombie: p.zombie?,
+          position: p.last_position
+        } end)
       else
         state.players
         |> Map.to_list
@@ -142,7 +191,7 @@ defmodule Zombie.GameServer do
     # Update user position in Game and database
     send(__MODULE__, {:update_position, user, longitude, latitude})
     # Send channel notification to proper users about location change
-    send(__MODULE__, {:notify_user_move, user, longitude, latitude})
+    send(__MODULE__, {:notify_user_move, user})
     # Check players colisions and report game result
     send(__MODULE__, {:check_colisions, user})
     :ok
