@@ -128,7 +128,7 @@ function setMarker(position, title, zombie) {
       url: "/images/pointuser1.png",
       scaledSize: new google.maps.Size(36, 36)
     };
-  if (zombie) {
+  if (zombie != 'undefined' && zombie) {
     image = {
       url: "/images/pointuser2.png",
       scaledSize: new google.maps.Size(36, 36)
