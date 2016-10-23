@@ -42,7 +42,7 @@ defmodule Zombie.GameServer do
 
     state = 
       if (state.last_visible |> DateTime.to_unix) + @human_reveal_interval < (DateTime.utc_now() |> DateTime.to_unix) do
-        Logger.debug("#{inspect state}")
+        Logger.info("#{inspect state}")
         # Send to all users information about humans
 
         humans =
@@ -64,7 +64,7 @@ defmodule Zombie.GameServer do
         state
       end
 
-    # TODO: Send to all users information about zombies constantly
+    # Send to all users information about zombies constantly
 
     zombies =
       state.players
