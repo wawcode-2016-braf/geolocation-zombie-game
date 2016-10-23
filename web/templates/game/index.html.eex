@@ -29,6 +29,7 @@ function myMap() {
   var mapOptions = {
     center: new google.maps.LatLng(52.22739, 20.99087), 
     zoom: 15,
+    mapTypeControl: false,
     styles: [
             {elementType: 'geometry', stylers: [{color: '#391a1b'}]},
             {elementType: 'labels.text.stroke', stylers: [{color: '#272030'}]},
