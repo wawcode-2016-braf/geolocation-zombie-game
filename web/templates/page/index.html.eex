@@ -4,7 +4,7 @@
       <h1>"Walkę stworzyła na­tura, niena­wiść jest wy­nalaz­kiem człowieka"</h1>
     
   </div>
-  <div class='row'>
+  <div class='row zombiebg'>
     <div class='col-sm-6 lewa'>
       <p class="p1">Zaloguj się!</p>
       <form class="form1" name="nazwa" action="/game" method="get" ENCTYPE="multipart/form-data">
@@ -22,8 +22,6 @@
       </form>
     </div>
     <div class='col-sm-6 right'>
-      <div class="zombieindex"><img class="zombieindeximg1" src="/images/zombieindex.png"></div>
-      <div class="zombieindex2"><img class="zombieindeximg2" src="/images/zombieindex2.png"></div>
       <div class="righttext">
       <h3>Gra terenowa w Twoim mieście!</h3>
       <p>Już dziś dołącz do milionów graczy i zmierz się z nimi w grze o PRZETRWANIE. Spróbuj swoich sił w ucieczce przed zombie lub poluj na ocalałych jako ożywiony potwór. Poznawaj ludzi, obmyślaj taktyki i zdobywaj punkty zwycięstwa.</p><br>
