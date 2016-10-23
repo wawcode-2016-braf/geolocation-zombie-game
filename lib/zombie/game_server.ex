@@ -7,8 +7,8 @@ defmodule Zombie.GameServer do
 
   alias Zombie.{User, Location, Repo, PlayerView}
 
-  @immune_time 120_000 # miliseconds
-  @distance 50 # meters
+  @immune_time 60 # seconds
+  @distance 25 # meters
   @human_reveal_interval 30 # seconds 
   @zombies_ratio 5 # zombies per human
 
@@ -65,7 +65,6 @@ defmodule Zombie.GameServer do
       end
 
     # Send to all users information about zombies constantly
-
     zombies =
       state.players
       |> Map.to_list
@@ -94,11 +93,32 @@ defmodule Zombie.GameServer do
 
     {:noreply, %State{state | players: players}}
   end
-  def handle_info({:check_colisions, %User{} = user}, %State{} = state) do
+  def handle_info({:check_colisions, %User{} = user}, %State{players: players} = state) do
     # TODO: Check if the user colides with any other user
     # Colisions count only if time passed from start is bigger than @immune_time
 
-    {:noreply, state}
+    IO.puts "=========CHECK COLLISIONS============="
+    IO.puts "Game time elapsed #{(DateTime.utc_now |> DateTime.to_unix) - (state.start_date |> DateTime.to_unix)}s"
+
+    if (DateTime.utc_now |> DateTime.to_unix) - (state.start_date |> DateTime.to_unix) > @immune_time do
+      IO.puts "=========GAME READY============="
+
+      player = Map.get(players, user.id)
+
+      players
+      |> Map.to_list
+      |> Enum.each(fn {_id, p} -> 
+        if player.user.id != p.user.id and player.zombie? != p.zombie? do
+          if IO.inspect(Distance.GreatCircle.distance(player.position, p.position)) < @distance do
+            Process.send_after(__MODULE__, {:new_game, if player.zombie? do player else p end}, 50)
+          end
+        end
+      end)
+
+      {:noreply, state}
+    else
+      {:noreply, state}
+    end
   end
   def handle_info({:notify_user_move, user}, %State{players: players} = state) do
     player = Map.get(players, user.id)
@@ -117,6 +137,24 @@ defmodule Zombie.GameServer do
     end
 
     {:noreply, state}
+  end
+  def handle_info({:new_game, player}, %State{players: players} = state) do
+    IO.puts "==========NEW GAME============="
+    IO.puts "Winner: " <> player.user.name
+
+    players
+    |> Map.to_list
+    |> Enum.each(fn {_id, p} -> 
+        if player.user.id != p.user.id do
+          Zombie.Endpoint.broadcast("room:" <> p.user.name, "gameover", %{})
+        else
+          Zombie.Endpoint.broadcast("room:" <> p.user.name, "win", %{})
+        end
+      end)
+
+    # Hacky: Removing all users - we will refresh their webpages
+    player = %Player{player | zombie?: false}
+    {:noreply, %State{state | players: %{player.user.id => player}, start_date: DateTime.utc_now(), last_visible: DateTime.utc_now()}}
   end
 
   def handle_call({:join, %User{} = user}, _from, %State{players: players} = state) do

@@ -87,6 +87,16 @@ if (name != '') {
       setMarker(loc, loc.name, loc.zombie);
     }
   })
+
+  channel.on("win", () => {
+    alert("Wygrałeś! Jesteś teraz człowiekiem. Uciekaaaaaaaj!");
+    location.reload();
+  });
+
+  channel.on("gameover", () => {
+    alert("Nie udało Ci się wygrać... Nie poddawaj się, graj dalej!");
+    location.reload();
+  });
 }
 
 export default socket
