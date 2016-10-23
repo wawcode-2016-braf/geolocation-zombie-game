@@ -70,6 +70,9 @@ import socket from "./socket"
         }
     }
 
+    // hack to make it center only once
+    var latlngc = 0;
+
     function setPosition(position) {
         var x = document.getElementById("location");
         x.innerHTML = "Latitude: " + position.coords.latitude +
@@ -86,7 +89,12 @@ import socket from "./socket"
         var latlng = {lat: position.coords.latitude, lng: position.coords.longitude};
 
         setMarker(latlng, name);
-        setCenter(latlng);
+        if (latlngc == 0) {
+            setCenter(latlng);
+        }
+
+        latlngc++;
+
     }
 
     setInterval(getLocation, 5000);
