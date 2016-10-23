@@ -80,6 +80,7 @@ p {
         background-image: url("/images/front.png");
         background-position: bottom;
     }
+    
     .social {
         position: absolute;
         left: 380px;
@@ -178,6 +179,26 @@ p {
         padding-bottom: 25px;
     }
 
+    .zombieindex {
+        display: none;
+    }
+
+    .zombieindex2 {
+        display: none;
+    }
+
+    .zombieindeximg1 {
+        display: none;
+    }
+
+    .zombieindeximg2 {
+        display: none;
+    }
+   
+    .social {
+        display: none;
+    }
+   
 }
 
 
